@@ -17,6 +17,7 @@ class _StartAppState extends State<StartApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        // debugShowCheckedModeBanner: false,
         title: 'FlutterStarter',
         theme: ThemeData(
           primarySwatch: Colors.blue,
