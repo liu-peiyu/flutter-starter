@@ -20,7 +20,6 @@ class HomeWidgetState extends State<HomeWidget> {
     bool flag = await _prefs.then((SharedPreferences prefs) {
       return prefs.setString(accessToken, value);
     });
-    print(flag);
   }
 
   Future<void> getToken() async {
