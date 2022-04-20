@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import './config.dart';
+
 import 'pages/home.dart';
 
 void main() {
@@ -18,7 +20,7 @@ class _StartAppState extends State<StartApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
         // debugShowCheckedModeBanner: false,
-        title: 'FlutterStarter',
+        title: Env.envConfig.appTitle,
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),

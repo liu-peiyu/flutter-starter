@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../config.dart';
+
 import '../constant.dart';
 
 class HomeWidget extends StatefulWidget {
@@ -60,6 +62,10 @@ class HomeWidgetState extends State<HomeWidget> {
           ),
           ElevatedButton(
             child: const Text('读取数据'),
+            onPressed: getToken,
+          ),
+          ElevatedButton(
+            child: Text(Env.envConfig.appDomain),
             onPressed: getToken,
           ),
         ],
