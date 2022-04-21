@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_starter/provider/auth_provider.dart';
+import 'package:flutter_starter/provider/counter_provider.dart';
+import 'package:provider/provider.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -22,12 +25,22 @@ class HomeWidgetState extends State<HomeWidget> {
     bool flag = await _prefs.then((SharedPreferences prefs) {
       return prefs.setString(accessToken, value);
     });
+    if (flag) {
+      Provider.of<AuthProvider>(context, listen: false).setToken(value);
+      // context.read<AuthProvider>().setToken(value);
+      setState(() {
+        _token = value;
+      });
+    }
   }
 
   Future<void> getToken() async {
     String token = await _prefs.then((SharedPreferences prefs) {
       return prefs.getString(accessToken) ?? "";
     });
+    if (token.isNotEmpty) {
+      context.read<AuthProvider>().setToken(token);
+    }
     setState(() {
       _token = token;
     });
@@ -64,9 +77,18 @@ class HomeWidgetState extends State<HomeWidget> {
             child: const Text('读取数据'),
             onPressed: getToken,
           ),
+          //测试多环境配置
           ElevatedButton(
             child: Text(Env.envConfig.appDomain),
             onPressed: getToken,
+          ),
+          // 测试Provider
+          ElevatedButton(
+            child:
+                Text(Provider.of<CounterProvider>(context).getCount.toString()),
+            onPressed: () {
+              context.read<CounterProvider>().increase();
+            },
           ),
         ],
       ),

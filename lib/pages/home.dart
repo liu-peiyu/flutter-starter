@@ -24,7 +24,7 @@ class _HomePageState extends State<HomePage> {
   void setIndex(int index) {
     setState(() {
       tabIndex = index;
-      print('$index');
+      debugPrint('$index');
     });
   }
 
