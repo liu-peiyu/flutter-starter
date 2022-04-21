@@ -8,7 +8,7 @@ import 'package:flutter_starter/provider/auth_provider.dart';
 
 import './config.dart';
 
-import 'pages/home.dart';
+import 'route/routes.dart';
 
 void main() {
   runApp(MultiProvider(providers: [
@@ -28,11 +28,14 @@ class _StartAppState extends State<StartApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        // debugShowCheckedModeBanner: false,
-        title: Env.envConfig.appTitle,
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        home: const HomePage());
+      // debugShowCheckedModeBanner: false,
+      title: Env.envConfig.appTitle,
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      initialRoute: "/",
+      routes: routes,
+      // home: const HomePage()
+    );
   }
 }

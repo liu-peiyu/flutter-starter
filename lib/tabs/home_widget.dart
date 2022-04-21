@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
 import 'package:flutter_starter/provider/auth_provider.dart';
 import 'package:flutter_starter/provider/counter_provider.dart';
 import 'package:provider/provider.dart';
@@ -19,37 +21,32 @@ class HomeWidget extends StatefulWidget {
 class HomeWidgetState extends State<HomeWidget> {
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
-  String _token = "";
+  String _currentTime = "";
 
-  Future<void> setToken(String value) async {
+  Future<void> setDateTime(String value) async {
     bool flag = await _prefs.then((SharedPreferences prefs) {
-      return prefs.setString(accessToken, value);
+      return prefs.setString("dateTime", value);
     });
     if (flag) {
-      Provider.of<AuthProvider>(context, listen: false).setToken(value);
-      // context.read<AuthProvider>().setToken(value);
-      setState(() {
-        _token = value;
-      });
+      Fluttertoast.showToast(msg: "设置成功");
     }
   }
 
-  Future<void> getToken() async {
+  Future<void> getDateTime() async {
     String token = await _prefs.then((SharedPreferences prefs) {
-      return prefs.getString(accessToken) ?? "";
+      return prefs.getString("dateTime") ?? "";
     });
     if (token.isNotEmpty) {
-      context.read<AuthProvider>().setToken(token);
+      setState(() {
+        _currentTime = token;
+      });
+      Fluttertoast.showToast(msg: "获取成功");
     }
-    setState(() {
-      _token = token;
-    });
   }
 
   @override
   void initState() {
     super.initState();
-    getToken();
   }
 
   @override
@@ -66,21 +63,21 @@ class HomeWidgetState extends State<HomeWidget> {
       child: Column(
         children: <Widget>[
           Text(
-            _token,
+            _currentTime,
             style: const TextStyle(fontSize: 20),
           ),
           ElevatedButton(
             child: const Text('写入数据'),
-            onPressed: () => setToken(DateTime.now().toString()),
+            onPressed: () => setDateTime(DateTime.now().toString()),
           ),
           ElevatedButton(
             child: const Text('读取数据'),
-            onPressed: getToken,
+            onPressed: getDateTime,
           ),
           //测试多环境配置
           ElevatedButton(
             child: Text(Env.envConfig.appDomain),
-            onPressed: getToken,
+            onPressed: null,
           ),
           // 测试Provider
           ElevatedButton(

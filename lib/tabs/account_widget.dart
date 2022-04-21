@@ -12,13 +12,34 @@ class AccountWidget extends StatefulWidget {
 }
 
 class AccountWidgetState extends State<AccountWidget> {
-  String _token = "";
-
   @override
   void initState() {
     super.initState();
-    _token = context.read<AuthProvider>().getToken;
-    debugPrint(_token);
+    debugPrint("initState");
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    debugPrint("didChangeDependencies");
+  }
+
+  @override
+  void didUpdateWidget(AccountWidget oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    debugPrint("didUpdateWidget");
+  }
+
+  @override
+  void deactivate() {
+    super.deactivate();
+    debugPrint("deactivate");
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    debugPrint("dispose");
   }
 
   @override
@@ -37,8 +58,9 @@ class AccountWidgetState extends State<AccountWidget> {
                 'Token：',
                 style: TextStyle(fontSize: 20),
               ),
+              //
               Text(
-                context.read<AuthProvider>().getToken,
+                Provider.of<AuthProvider>(context).getToken,
                 style: const TextStyle(fontSize: 20),
               ),
             ],
@@ -48,6 +70,20 @@ class AccountWidgetState extends State<AccountWidget> {
             label: const Text('add'),
             onPressed: () {
               context.read<CounterProvider>().increase();
+            },
+          ),
+          ElevatedButton.icon(
+            icon: const Icon(Icons.login),
+            label: const Text('login'),
+            onPressed: () {
+              Navigator.of(context).pushNamed('/login');
+            },
+          ),
+          ElevatedButton.icon(
+            icon: const Icon(Icons.logout),
+            label: const Text('logout'),
+            onPressed: () {
+              context.read<AuthProvider>().logout();
             },
           ),
         ],

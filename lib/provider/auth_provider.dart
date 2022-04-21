@@ -9,4 +9,9 @@ class AuthProvider extends ChangeNotifier {
     _token = value;
     notifyListeners();
   }
+
+  void logout() {
+    _token = "";
+    notifyListeners();
+  }
 }
