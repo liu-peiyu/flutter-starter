@@ -38,6 +38,9 @@ dependencies:
   dio: ^4.0.6
   provider: ^6.0.2
   fluttertoast: ^8.0.9
+  crypto: ^3.0.1  #字符加密
+  flutter_easyloading: ^3.0.3   #简单的加载loading
+  convert: ^3.0.0
   
 dev_dependencies:
   flutter_test:
