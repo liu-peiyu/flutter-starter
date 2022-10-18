@@ -4,5 +4,5 @@ import 'package:flutter_starter/pages/login.dart';
 
 Map<String, WidgetBuilder> routes = {
   "/": (context) => const HomePage(),
-  "/login": (context) => LoginPage(),
+  "/login": (context) => const LoginPage(),
 };
